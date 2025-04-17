@@ -19,4 +19,16 @@ describe("String Calculator", () => {
     expect(add("1,2,    ,")).toBe(3);
     expect(add("    , 1,2,    ,4,   ")).toBe(7);
   })
+
+  test("Allow the add method to handle new lines between numbers", () => {
+    expect(add("1\n2,3")).toBe(6);
+    expect(add("1\n2\n3")).toBe(6);
+    expect(add("1,\n2,3")).toBe(6);
+    expect(add("1,\n2,3\n5")).toBe(11);
+    expect(add("1,\n2,3\n,5")).toBe(11);
+    expect(add("  ,  , \n  , 1,\n2,3\n,5         ")).toBe(11);
+    expect(add("1,\n,2")).toBe(3);
+    expect(add("\n1\n2\n")).toBe(3);
+    expect(add("   \n , \n ,2, 3")).toBe(5);
+  });
 });
