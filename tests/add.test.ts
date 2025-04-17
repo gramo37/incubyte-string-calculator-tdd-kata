@@ -8,6 +8,15 @@ describe("String Calculator", () => {
   test("Returns sum for comma separated number string with 1 to 2 numbers", () => {
     expect(add("0")).toBe(0);
     expect(add("1")).toBe(1);
+    expect(add("    7    ")).toBe(7);
+    expect(add("     ,     ")).toBe(0);
     expect(add("1,5")).toBe(6);
   });
+
+  test("Allow the add method to handle any amount of numbers.", () => {
+    expect(add("1,5, 2,3,  4")).toBe(15);
+    expect(add("1,2, 3,10,  4, 111, 1222,")).toBe(1353);
+    expect(add("1,2,    ,")).toBe(3);
+    expect(add("    , 1,2,    ,4,   ")).toBe(7);
+  })
 });
