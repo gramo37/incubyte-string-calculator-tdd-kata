@@ -31,4 +31,17 @@ describe("String Calculator", () => {
     expect(add("\n1\n2\n")).toBe(3);
     expect(add("   \n , \n ,2, 3")).toBe(5);
   });
+
+  test("Support custom single-character delimiters", () => {
+    expect(add("//;\n1;2")).toBe(3);
+    expect(add("//|\n1|2|3")).toBe(6);
+    expect(add("//,\n1,2,3")).toBe(6);
+    expect(add("//-\n1-2-3")).toBe(6);
+  });
+  
+  test("Support custom delimiter with newline and ignore spaces", () => {
+    expect(add("//;\n1 ; 2 ; 3")).toBe(6);
+    expect(add("//;\n1 ; 2 ; 3   ;")).toBe(6);
+    expect(add("//,\n1,2\n3   \n \n \n ,")).toBe(6);
+  });
 });
