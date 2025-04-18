@@ -1,11 +1,11 @@
 export function add(numberString: string): number {
-  if (numberString === "") return 0;
+  if (!numberString) return 0;
 
   const bracketFindingRegex = /\[([^\]]+)\]/g;
   const escapeSpecialCharacterRegex = /[.*+-?^${}()|[\]\\]/g;
 
   // default delimiter: comma or newline
-  let delimiter = /,|\n/;
+  let delimiter: RegExp = /,|\n/;
   let numbersPart = numberString;
 
   // Check for custom delimiter syntax: "//[delimiter]\n[numbers]"
@@ -53,9 +53,5 @@ export function add(numberString: string): number {
     );
   }
 
-  let sm = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    sm += numbers[i];
-  }
-  return sm;
+  return numbers.reduce((sum, n) => sum + n, 0);
 }
