@@ -19,8 +19,11 @@ export function add(numberString: string): number {
     if (delimiterMatches.length > 0) {
       // If bracket found escape special characters with \\, to treat it like a normal literal
       // Eg -> * -> \\*
+      const delimters = delimiterMatches.map(m => 
+        m[1].replace(escapeSpecialCharacterRegex, "\\$&")
+      )
       delimiter = new RegExp(
-        delimiterMatches[0][1].replace(escapeSpecialCharacterRegex, "\\$&") +
+        delimters.join("|") +
           "|\n"
       );
     } else {
