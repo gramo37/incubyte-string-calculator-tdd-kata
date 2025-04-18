@@ -53,4 +53,16 @@ describe("String Calculator", () => {
     expect(() => add("//;\n1;-2;-3   ;   \n")).toThrow("negative numbers not allowed -2,-3");
     expect(() => add("//-\n1--2-3")).toThrow("negative numbers not allowed -2");
   });
+
+  test("Support custom length delimiters", () => {
+    expect(add("//[***]\n1***2***3")).toBe(6);
+    expect(add("//[--]\n1--2--3")).toBe(6);
+    expect(add("//[!!!]\n1!!!2!!!3")).toBe(6);
+  });
+  
+  test("Support custom length demiliters for negative numbers", () => {
+    expect(() => add("//[***]\n1***-2***-3")).toThrow("negative numbers not allowed -2,-3");
+    expect(() => add("//[---]\n1----2---3")).toThrow("negative numbers not allowed -2");
+    expect(() => add("//[!!!]\n1!!!2!!!-3")).toThrow("negative numbers not allowed -3");
+  });
 });
