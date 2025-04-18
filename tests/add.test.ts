@@ -65,4 +65,14 @@ describe("String Calculator", () => {
     expect(() => add("//[---]\n1----2---3")).toThrow("negative numbers not allowed -2");
     expect(() => add("//[!!!]\n1!!!2!!!-3")).toThrow("negative numbers not allowed -3");
   });
+
+  test("Support multiple custom delimiters", () => {
+    expect(add("//[*][%]\n1*2%3")).toBe(6);
+    expect(add("//[***][#][%]\n1***2#3%4")).toBe(10);
+  });
+
+  test("Multiple demiliter for negative numbers", () => {
+    expect(() => add("//[***][#][%]\n1***2#3%-4")).toThrow("negative numbers not allowed -4");
+    expect(() => add("//[---][#][%]\n1----2#3%-4")).toThrow("negative numbers not allowed -2,-4");
+  });
 });
